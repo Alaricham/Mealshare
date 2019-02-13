@@ -1,0 +1,61 @@
+<% include partials/header %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card special">
+        <div class="card-body">
+          <h1>Ingredients</h1>
+          <ul>
+          <% meal.ingredients.forEach(ingredient => { %>
+          <li><%= ingredient.name %> - <%= ingredient.quantity%> <%= ingredient.type%></li>
+          <% }) %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card special">
+          <div class="card-body">
+          <img class="img-thumbnail" src="<%= meal.image %>">
+          <div class="caption">
+            <h1 class="meal-header"><%= meal.name %></h1>
+            <p class="descriptions"><%= meal.description %></p>
+            <p class="creator">Meal created by <%= meal.creator.username %></p>
+            <% if(currentUser && meal.creator.id.equals(currentUser._id)) { %>
+              <a class="btn btn-primary btn-sm"href="/meals/<%= meal._id %>/edit">Edit</a>
+              <form class="bt-element" action="/meals/<%= meal._id %>/delete?_method=DELETE" method="post">
+                <div class="form-group">
+                  <button class="btn btn-primary btn-sm">Delete</button>
+                </div>
+              </form>
+            <% } %>
+          </div>
+        </div>
+        </div>
+        <div class="d-flex justify-content-center csec">
+            <a class="btn btn-primary btn-sm " href="/meals/<%= meal._id %>/comment/new">Comment <i class="fas fa-plus"></i></a>
+        </div>
+        <ul>
+          <% meal.comments.forEach(function (comment) { %>
+            <li class="comments">
+              <a href="/user/<%= comment.author.id %>"><strong><%= comment.author.username %></strong></a> - <%= comment.text %> </p>
+              <% if(currentUser && currentUser._id.equals(comment.author.id)) { %>
+                <a href="/meals/<%= meal._id %>/comment/<%= comment._id %>/edit"><i class="fas fa-edit"></i></a>
+                <form class="bt-element" action="/meals/<%= meal._id %>/comment/<%= comment._id %>/delete?_method=DELETE" method="post">
+                  <div class="form-group">
+                    <a href="javascript:$('form').submit();"><i class="fas fa-trash-alt"></i></a>
+                  </div>
+                </form>
+              </li>
+              <% } %>
+              <% }); %>
+            </ul>
+        </div>
+      </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  </body>
+</html>

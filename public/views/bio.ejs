@@ -1,0 +1,38 @@
+<% include partials/header %>
+<div class="row">
+  <div class="col-md-4">
+    <div class="container">
+    <div class="card special">
+      <div class="container">
+        <h1><%= user.username %></h1>
+        <img class="img-fluid rounded" src='/profiles/placeholder.png'>
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="col-md-8">
+    <div class="row">
+      <% usermeals.forEach(function(meal) { %>
+        <div class="col-md-4 dspace">
+          <div class="img-thumbnail listed">
+         <div class="card">
+           <h4><%= meal.name %></h4>
+           <img class="img-fluid" src="<%= meal.image %>">
+         </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+    <div class="row">
+      <% usermeals.forEach( function (meal) { %>
+        <div class="col-md-12">
+          <div class="card special">
+            <p><%= meal.comments[0].text %> - <%= meal.name %>  </p>
+          </div>
+    </div>
+      <% }) %>
+  </div>
+</div>
+</div>
+
+<% include partials/footer %>

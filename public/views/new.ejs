@@ -1,0 +1,83 @@
+<% include partials/header %>
+<div class="container">
+  <div class="row">
+    <div class="formtype" style='width: 80%; margin: 0 auto;'>
+        <div class="form-group">
+          <input class="form-control" type="text" id="name" placeholder="Meal Name">
+        </div>
+        <div class="form-group">
+          <input class="form-control"type="text" id="image-name" placeholder="Image Link">
+        </div>
+        <div class="form-group" id="ing">
+        <label for="add">Add Ingredients & Quantities</label>
+          <button type="button" id="add">+</button>
+          <ul id="ing-list">
+          </ul>
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" rows="5" id="description" placeholder="Description"></textarea>
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary" id="send">Submit</button>
+        </div>
+    </div>
+    </div>
+    <div class="d-flex justify-content-center back">
+      <a class="btn btn-primary btn-sm"href="/meals">Go back</a>
+    </div>
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  let ingList = document.querySelector('#ing-list'),
+  sendButton = document.querySelector('#send'),
+  ing = document.querySelector('#ing');
+
+  ing.addEventListener('click', event => {
+    event.preventDefault();
+    event.stopPropagation();
+    let target = event.target;
+    if(target.id === 'add') {
+      let item = document.createElement('li'),
+      list = document.querySelector('#ing-list');
+      item.innerHTML = '<input placeholder="name" type="text"></input><input placeholder="quantity" type="number"></input><select id="measurement">' + 
+      '<option value="g">g</option><option value="oz">oz</option><option value="cups">cups</option><option value="tsp">tsp</option>' +
+      '<option value="tbsp">tbsp</option><option value="lb">lb</option></select><button type="button" class="remover">-</button>';
+      list.appendChild(item);
+    } else if (target.className === 'remover') {
+      let node = target.parentNode;
+      node.parentNode.removeChild(node);
+    }
+  })
+
+  sendButton.addEventListener('click', () => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    let name = document.querySelector('#name'),
+    image = document.querySelector('#image-name'),
+    measurement = document.querySelector('#measurement'),
+    description = document.querySelector('#description'),
+    list = [],
+    nodes = ingList.childNodes,
+    length = nodes.length;
+
+    if(length) {
+    for(let i = 1; i < length; i++) {
+      list.push({name: nodes[i].childNodes[0].value, quantity: nodes[i].childNodes[1].value, type: nodes[i].childNodes[2].value })
+    }
+  }
+
+    axios.post('/meals', {
+      name: name.value,
+      description: description.value,
+      ingredients: list,
+      image: image.value
+    }).then(res=> {
+      window.location = '/meals';
+    }).catch(err => {
+      console.log(err)
+    })
+
+  })
+</script>
+<% include partials/footer %>
