@@ -15,7 +15,7 @@ const express = require('express'),
 
 require('dotenv').config()
 const port = process.env.PORT,
-  mongo = process.env.MONGO
+  mongo = process.env.MONGO;
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -24,11 +24,12 @@ app.use(bodyParser.json())
 app.use(express.static('Assets'));
 app.use(express.static('public'));
 
-var mealRoutes = require('./routes/meals'),
+const mealRoutes = require('./routes/meals'),
   commentRoutes = require('./routes/comments'),
   indexRoutes = require('./routes/index');
+
 app.use(flash());
-mongoose.connect(mongo);
+mongoose.connect('mongodb+srv://alaricham:unodeseis@cluster0-sjwvg.mongodb.net/test?retryWrites=true');
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/public/views'))
 app.use(mOverride('_method'));
