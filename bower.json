@@ -1,0 +1,17 @@
+{
+  "name": "yelpcamp",
+  "description": "yelpcamp 1.0",
+  "main": "app.js",
+  "authors": [
+    "alarich <alarich_am@hotmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

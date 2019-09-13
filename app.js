@@ -29,7 +29,7 @@ const mealRoutes = require('./routes/meals'),
   indexRoutes = require('./routes/index');
 
 app.use(flash());
-mongoose.connect('mongodb+srv://alaricham:unodeseis@cluster0-sjwvg.mongodb.net/test?retryWrites=true');
+mongoose.connect(mongo);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/public/views'))
 app.use(mOverride('_method'));
@@ -59,6 +59,6 @@ app.use('/meals/:id/comment', commentRoutes);
 
 // Port Listen
 
-app.listen(port, () => {
+app.listen( port ||'3000', () => {
   console.log('Mealshare server running...');
 });

@@ -1,24 +1,23 @@
 <% include partials/header %>
-<div class="container">
-  <header class = 'jumbotron'>
-    <div class="container jumbo">
-      <h1 class="jumb">Welcome to Mealshare!</h1>
-      <p class="jumb">Delicious meals shared by passionate cooks</p>
-      <a class="btn btn-lg btn-primary" href="/meals/new">Add Recipe!</a>
-    </div>
-  </header>
+<div class="header-index">
+  <div class="dark-index"></div>
+  <div class="bgimage-index"></div>
 </div>
-<div class="container">
+<div class="content">
+  <div class="head-text">
+    <p class="jumb">Delicious meals shared by passionate cooks</p>
+    <hr class="hrline">
+    <a class="block"  href="/meals/new"><button class="btn-custom">Add a Recipe!</button></a>
+  </div>
   <div class="row text-center" style="display: flex; flex-wrap: wrap;s">
     <% meals.forEach(function (meal) { %>
       <div class="col-md-3 col-sm-6">
-        <div class="img-thumbnail listed">
-          <div class="card">
-            <img class='img-fluid' src='<%= meal.image %>'>
+        <a href="/meals/<%= meal._id %>">
+
+          <div class='img-tag'>
+          <img class='img-fluid img-file' src='<%= meal.image %>'>
           </div>
-          <h5 class="caption"><%= meal.name %></h4>
-          <a class="btn btn-primary" href="/meals/<%= meal._id %>">More Info</a>
-        </div>
+        </a>
       </div>
       <% }); %>
     </div>

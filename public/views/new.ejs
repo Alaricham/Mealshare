@@ -1,30 +1,29 @@
 <% include partials/header %>
-<div class="container">
+<div class="bgform alt scroller">
+<div class="container container-body">
   <div class="row">
-    <div class="formtype" style='width: 80%; margin: 0 auto;'>
+    <div id="head-splitter" class="formtype">
         <div class="form-group">
-          <input class="form-control" type="text" id="name" placeholder="Meal Name">
+          <input class="form-control xtra-w" type="text" id="name" placeholder="Meal Name">
         </div>
         <div class="form-group">
-          <input class="form-control"type="text" id="image-name" placeholder="Image Link">
+          <input class="form-control xtra-w"type="text" id="image-name" placeholder="Image Link">
         </div>
         <div class="form-group" id="ing">
         <label for="add">Add Ingredients & Quantities</label>
-          <button type="button" id="add">+</button>
+          <button class="btn-custom icn" type="button" id="add">+</button>
           <ul id="ing-list">
           </ul>
         </div>
         <div class="form-group">
-          <textarea class="form-control" rows="5" id="description" placeholder="Description"></textarea>
+          <textarea class="form-control" id="txtarea" rows="5" id="description" placeholder="Description"></textarea>
         </div>
         <div class="form-group">
-          <button class="btn btn-primary" id="send">Submit</button>
+          <button class="btn-custom" id="send">Submit</button>
         </div>
     </div>
     </div>
-    <div class="d-flex justify-content-center back">
-      <a class="btn btn-primary btn-sm"href="/meals">Go back</a>
-    </div>
+</div>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
@@ -39,7 +38,7 @@
     if(target.id === 'add') {
       let item = document.createElement('li'),
       list = document.querySelector('#ing-list');
-      item.innerHTML = '<input placeholder="name" type="text"></input><input placeholder="quantity" type="number"></input><select id="measurement">' + 
+      item.innerHTML = '<input class="form-control" placeholder="name" type="text"></input><input class="form-control left" placeholder="quantity" type="number"></input><select id="measurement">' + 
       '<option value="g">g</option><option value="oz">oz</option><option value="cups">cups</option><option value="tsp">tsp</option>' +
       '<option value="tbsp">tbsp</option><option value="lb">lb</option></select><button type="button" class="remover">-</button>';
       list.appendChild(item);
